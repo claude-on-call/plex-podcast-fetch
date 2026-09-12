@@ -90,8 +90,8 @@ testing above doesn't, so it's on you and on review.
 - Comments should explain *why*, particularly around Plex's own quirks —
   several of the README's "Known Issues and Design Notes" exist only
   because of one.
-- Python 3.9+, PEP 8, a soft line limit around 120 characters (matches the
-  existing file).
+- Python 3.10+ (`feedparser` 6.0.14 requires it), PEP 8, a soft line limit
+  around 120 characters (matches the existing file).
 
 ## Review and merging
 
