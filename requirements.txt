@@ -1,0 +1,6 @@
+# Pinned to match Dockerfile. Docker is the recommended way to run this;
+# install these directly only if you're running fetch.py outside a container.
+feedparser==6.0.14
+mutagen==1.48.1
+PyYAML==6.0.3
+requests==2.34.2

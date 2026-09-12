@@ -1,0 +1,23 @@
+# Copy this to feeds.yaml and edit. After editing:
+#   docker compose exec fetch python /app/fetch.py run
+#
+# Per-show keys override the defaults below. Set `name:` BEFORE a show's
+# first run -- it becomes the folder name and the artist/album tag in Plex.
+#
+# Finding a feed URL: see "Finding a show's feed URL" in README.md.
+
+defaults:
+  # Deletion: an episode is NEVER deleted until you've listened to it (Plex
+  # play count on the account behind PLEX_TOKEN). After that it goes once
+  # `keep` newer episodes of the show have landed, or `grace_days` after you
+  # listened, whichever comes first. Half-played = not listened = kept.
+  keep: 20
+  grace_days: 30
+  backfill: 3         # when a show is first added, only grab the latest N
+  interval_hours: 2   # polling cadence (conditional GET, so cheap)
+
+shows:
+  - url: https://podcasts.files.bbci.co.uk/p02nq0gn.rss   # BBC Global News Podcast
+
+  - url: https://changelog.com/podcast/feed
+    name: "The Changelog"

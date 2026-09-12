@@ -1,0 +1,31 @@
+# Copy this to docker-compose.yml and edit PLEX_URL / PLEX_SECTION / the
+# volume paths for your setup, then: docker compose up -d
+
+services:
+  fetch:
+    build: .
+    image: plex-podcast-fetch:latest
+    restart: unless-stopped
+    environment:
+      TZ: UTC                              # your local timezone, e.g. Europe/London
+      PLEX_URL: http://192.168.1.100:32400 # your Plex server
+      PLEX_SECTION: ""                     # REQUIRED: your Podcasts library's section id
+                                            # (visible in its URL in Plex Web: .../library/sections/<id>/...)
+      PLEX_PATH: /data/podcasts            # ${LIB_DIR}, but as Plex itself sees the folder
+                                            # (matters when Plex and this container mount it at different paths)
+      PLEX_TOKEN: ${PLEX_TOKEN:?PLEX_TOKEN missing from .env}
+      PUSH_URL: ${PUSH_URL:-}              # optional: Uptime Kuma / healthchecks.io push monitor
+      FEEDS_FILE: /config/feeds.yaml
+    volumes:
+      - ./library:/podcasts   # point this at your actual Plex "Podcasts" library folder
+      - ./state:/state        # episode/show tracking database -- keep this, don't wipe it
+      - ./feeds.yaml:/config/feeds.yaml:ro
+
+    # If Plex also runs in Docker, either put this container on the same
+    # Docker network as Plex and use its service name for PLEX_URL, or just
+    # point PLEX_URL at Plex's published port on the host/LAN as above.
+    # networks:
+    #   - plex_network
+# networks:
+#   plex_network:
+#     external: true

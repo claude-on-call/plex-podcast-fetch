@@ -1,0 +1,12 @@
+# Secrets
+.env
+
+# Your local config (copied from the .example files)
+feeds.yaml
+docker-compose.yml
+
+# Runtime state and media
+state/
+library/
+__pycache__/
+*.pyc

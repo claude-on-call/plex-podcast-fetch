@@ -1,0 +1,54 @@
+name: Bug report
+description: Something doesn't work, or works differently than documented
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Please **redact your Plex
+        token and any personal paths or URLs** from anything you paste.
+
+        Found a security problem? Don't file it here — see
+        [SECURITY.md](https://github.com/claude-on-call/plex-podcast-fetch/blob/main/SECURITY.md).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include relevant `docker compose logs fetch` output, redacted.
+      placeholder: |
+        2026-09-12 09:00:01 ERROR Tech Life: 'Episode title' failed, will retry next run: ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: feed
+    attributes:
+      label: Which show / feed, if relevant?
+      description: A public feed URL helps a lot for reproducing feed-parsing issues.
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Your setup
+      description: |
+        Plex version, how you're running this (Docker/bare), and your
+        `feeds.yaml` defaults if you've changed them from the example.
+      placeholder: |
+        Plex Media Server 1.41.3, Docker Compose on Debian 12
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed my Plex token and personal data from what I pasted
+          required: true
+        - label: I'm using the latest commit on `main`
+          required: false
